@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="normalize.css">
   <link rel="stylesheet" href="main.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -19,9 +21,29 @@
 
 <body>
 
+<div class="clearfix">
+  <div class="grid grid-left">
+    test
+  </div>
+  <div class="grid grid-right">
+    <div id="weather-box">
+      <div id="weather-header">
+        <div id="weather-name"></div>
+        <div id="weather-current-temp"></div>
+      </div>
+      <div id="weather-details">
+        <div id="weather-humidity"></div>
+      </div>
+      <div id="weather-forecast">
+        <ul id="weather-forecast-list">
 
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-<script src="api_key.js"></script>
+<script src="secrets.js"></script>
 <script src="scripts.js"></script>
 </body>
 </html>

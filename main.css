@@ -1,3 +1,16 @@
 body {
     font-family: 'Open Sans', sans-serif;
+    width: 100%;
+}
+
+.grid {
+    float: left;
+    height: 100%;
+}
+
+.grid-left {
+    min-width: 70%;
+}
+.grid-right {
+    min-width: 30%;
 }
