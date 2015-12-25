@@ -1,6 +1,6 @@
 $(document).ready(function(){
-  $.get('http://api.openweathermap.org/data/2.5/weather?zip=' + zipCode + ',us&units=imperial&APPID=' + APIkey, function(response){
-    console.log(response);
+  OWM.init(APIkey, 'imperial');
+  OWM.currentByZip('03861', 'us', function(response){
     var name = response['name'],
       currentTemp = Math.round(response['main']['temp']),
       humidity = response['main']['humidity'];
