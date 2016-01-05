@@ -7,10 +7,11 @@
   <meta name="description" content="Today">
   <meta name="author" content="teleganov">
 
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="normalize.css">
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="weather-icons/css/weather-icons.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
@@ -27,9 +28,15 @@
   </div>
   <div class="grid grid-right">
     <div id="weather-box">
-      <div id="weather-header">
-        <div id="weather-name"></div>
-        <div id="weather-current-temp"></div>
+      <div id="weather-header" class="clearfix">
+        <div id="weather-header-left">
+          <div id="weather-name"></div>
+          <div id="weather-current-temp"></div>
+        </div>
+        <div id="weather-header-right">
+          <i id="weather-current-icon" class="wi"></i>
+          <div id="weather-description"></div>
+        </div>
       </div>
       <div id="weather-details">
         <div id="weather-humidity"></div>

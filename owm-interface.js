@@ -24,38 +24,114 @@ var OWM = {
     this.apiKey = apiKey;
     if(units) this.units = units;
   },
-  filterResponse: function(response) {
-    return response;
+  filterResponse: function(response, type) {
+    var filtered;
+    var directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    if(type === 'current'){
+      var windDirectionText;
+      var wind = response['wind']['deg'] + 22.5;
+      if(wind >= 360) wind -= 360;
+      windDirectionText = directions[Math.floor(wind / 45)];
+      filtered = {
+        name: response['name'],
+        conditions: response['weather'][0]['description'],
+        readableConditions: response['weather'][0]['main'],
+        conditionId: response['weather'][0]['id'],
+        conditionIcon: response['weather'][0]['icon'],
+        temperature: response['main']['temp'],
+        pressure: response['main']['pressure'],
+        humidity: response['main']['humidity'],
+        windSpeed: response['wind']['speed'],
+        windDirection: response['wind']['deg'],
+        windDirectionText: windDirectionText,
+        time: response['dt']
+      }
+      if(response['clouds']) filtered['cloudiness'] = response['clouds']['all'];
+      if(response['rain'])   filtered['rainVolume'] = response['rain']['3h'];
+      if(response['snow'])   filtered['snowVolume'] = response['snow']['3h'];
+    }
+    if(type === 'forecast'){
+      filtered = {
+        name: response['city']['name'],
+        data: []
+      };
+      response['list'].forEach(function(period){
+        var windDirectionText, entry;
+        var wind = period['wind']['deg'] + 22.5;
+        if(wind >= 360) wind -= 360;
+        windDirectionText = directions[Math.floor(wind / 45)];
+        entry = {
+          time: period['dt'],
+          conditions: period['weather']['description'],
+          readableConditions: period['weather']['main'],
+          conditionId: response['weather'][0]['id'],
+          conditionIcon: response['weather'][0]['icon'],
+          temperature: period['main']['temp'],
+          pressure: period['main']['pressure'],
+          humidity: period['main']['humidity'],
+          windSpeed: period['wind']['speed'],
+          windDirection: period['wind']['deg'],
+          windDirectionText: windDirectionText
+        }
+        if(period['clouds']) entry['cloudiness'] = period['clouds']['all'];
+        if(period['rain'])   entry['rainVolume'] = period['rain']['3h'];
+        if(period['snow'])   entry['snowVolume'] = period['snow']['3h'];
+        filtered['data'].push(entry);
+      });
+    }
+    return filtered;
   },
-  currentByZip: function(zipcode, country, callback){
-    if(!zipcode || !country) console.error('OWM: Missing parameters when calling "currentByZip"');
+  queryById: function(type, id, country, callback){
+    if(!type || !id || !country) console.error('OWM: Missing parameters when calling "queryById"');
     this.checkValidity();
     if(this.ready){
-      var queryURL = this.url + 'weather?zip=' + zipcode + ',' + country;
+      var req;
+      if(type === 'current'){ req = 'weather'; }
+      else if(type === 'forecast'){ req = 'forecast'; }
+      else { console.error('OWM: Invalid query type "'+ type + '" provided in "queryById"'); return; }
+      var queryURL = this.url + req + '?id=' + id;
       queryURL += '&units=' + this.units + '&APPID=' + this.apiKey;
       var that = this;
       $.get(queryURL, function(response){
-        console.log(response);
-        callback(that.filterResponse(response));
+        callback(that.filterResponse(response, type));
       });
     }
   },
-  currentByCoord: function(longitude, latitude, callback){
-    if(!longitude || !latitude) console.error('OWM: Missing parameters when calling "currentByCoord"');
+  queryByZip: function(type, zipcode, country, callback){
+    if(!type || !zipcode || !country) console.error('OWM: Missing parameters when calling "queryByZip"');
     this.checkValidity();
     if(this.ready){
-      var queryURL = this.url + 'weather?lat=' + latitude + '&lon=' + longitude;
+      var req;
+      if(type === 'current'){ req = 'weather'; }
+      else if(type === 'forecast'){ req = 'forecast'; }
+      else { console.error('OWM: Invalid query type "'+ type + '" provided in "queryByZip"'); return; }
+      var queryURL = this.url + req + '?zip=' + zipcode + ',' + country;
       queryURL += '&units=' + this.units + '&APPID=' + this.apiKey;
       var that = this;
       $.get(queryURL, function(response){
-        console.log(response);
-        callback(this.filterResponse(response));
+        callback(that.filterResponse(response, type));
       });
     }
   },
-  request: function(type, params, callback){
-    if(!type) console.error('OWM: Missing request type when calling "request"');
-    if(!params) console.error('OWM: Missing request parameters list when calling "request"');
+  queryByCoord: function(type, latitude, longitude, callback){
+    if(!type || !longitude || !latitude) console.error('OWM: Missing parameters when calling "queryByCoord"');
+    this.checkValidity();
+    if(this.ready){
+      var req;
+      if(type === 'current'){ req = 'weather'; }
+      else if(type === 'forecast'){ req = 'forecast'; }
+      else { console.error('OWM: Invalid query type "'+ type + '" provided in "queryByCoord"'); return; }
+      var queryURL = this.url + req + '?lat=' + latitude + '&lon=' + longitude;
+      queryURL += '&units=' + this.units + '&APPID=' + this.apiKey;
+      var that = this;
+      $.get(queryURL, function(response){
+        callback(this.filterResponse(response, type));
+      });
+    }
+  },
+  query: function(type, params, callback){
+    if(!type) console.error('OWM: Missing request type when calling "query"');
+    if(!params) console.error('OWM: Missing request parameters list when calling "query"');
     this.checkValidity();
     if(this.ready){
       var queryString = '';
@@ -64,10 +140,8 @@ var OWM = {
         this.updateQuery(queryString, key, params[key]);
       });
       queryURL += queryString;
-      var that = this;
       $.get(queryURL, function(response){
-        console.log(response);
-        callback(this.filterResponse(response));
+        callback(response);
       });
     }
   },
