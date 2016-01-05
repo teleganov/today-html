@@ -62,10 +62,10 @@ var OWM = {
         windDirectionText = directions[Math.floor(wind / 45)];
         entry = {
           time: period['dt'],
-          conditions: period['weather']['description'],
-          readableConditions: period['weather']['main'],
-          conditionId: response['weather'][0]['id'],
-          conditionIcon: response['weather'][0]['icon'],
+          conditions: period['weather'][0]['description'],
+          readableConditions: period['weather'][0]['main'],
+          conditionId: period['weather'][0]['id'],
+          conditionIcon: period['weather'][0]['icon'],
           temperature: period['main']['temp'],
           pressure: period['main']['pressure'],
           humidity: period['main']['humidity'],

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="weather-icons/css/weather-icons.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="moment.min.js"></script>
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -24,7 +25,15 @@
 
 <div class="clearfix">
   <div class="grid grid-left">
-    test
+    <div id="top-section" class="clearfix">
+      <div class="top-section-half" style="width: 37%;">
+        <div id="day-string"></div>
+        <div id="date-string"></div>
+      </div>
+      <div class="top-section-half" style="width: 63%;">
+        <div id="time-string"></div>
+      </div>
+    </div>
   </div>
   <div class="grid grid-right">
     <div id="weather-box">
@@ -38,8 +47,17 @@
           <div id="weather-description"></div>
         </div>
       </div>
-      <div id="weather-details">
-        <div id="weather-humidity"></div>
+      <div id="weather-desc">
+        <table>
+          <tr>
+            <td id="weather-humidity">Humidity: 99%</td>
+            <td id="weather-wind">Wind: 16MPH SW</td>
+          </tr>
+          <tr>
+            <td id="weather-cloudiness">Clouds: 99%</td>
+            <td id="weather-precip">Precip: 9 in</td>
+          </tr>
+        </table>
       </div>
       <div id="weather-forecast">
         <ul id="weather-forecast-list">
