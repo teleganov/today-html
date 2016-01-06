@@ -8,6 +8,7 @@ html {
 body {
     font-family: 'Muli', sans-serif;
     width: 100%;
+    min-width: 1820px;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
     color: white;
