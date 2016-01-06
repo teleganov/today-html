@@ -170,7 +170,7 @@ $(document).ready(function(){
   setInterval(updateCalendar, 60000); // check every minute
 
   // Weather
-  if(window.location.href.indexOf("franky") > -1){
+  if(window.location.href.indexOf("htmlpreview.github.io") > -1){
     zipCode = '02108';
     APIkey = '435fb52fe8d729d065de270d796a7493';
   }
