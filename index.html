@@ -31,7 +31,7 @@
         <div id="date-string"></div>
       </div>
       <div class="top-section-half" style="width: 63%;">
-        <div id="time-string"></div>
+        <div id="time-string"><span id="time-hour"></span><span id="time-separator">:</span><span id="time-minutes"></span></div>
       </div>
     </div>
   </div>
@@ -50,18 +50,45 @@
       <div id="weather-desc">
         <table>
           <tr>
-            <td id="weather-humidity">Humidity: 99%</td>
-            <td id="weather-wind">Wind: 16MPH SW</td>
+            <td id="weather-humidity"><i class="wi wi-humidity"></i><span></span></td>
+            <td id="weather-wind"><i class="wi wi-windy"></i><span></span></td>
           </tr>
           <tr>
-            <td id="weather-cloudiness">Clouds: 99%</td>
-            <td id="weather-precip">Precip: 9 in</td>
+            <td id="weather-cloudiness"><i class="wi wi-cloudy"></i><span></span></td>
+            <td id="weather-precip"><i class="wi wi-raindrops"></i><span></span></td>
+          </tr>
+          <tr>
+            <td id="weather-sunrise"><i class="wi wi-sunrise"></i><span></span></td>
+            <td id="weather-sunset"><i class="wi wi-horizon"></i><span></span></td>
           </tr>
         </table>
       </div>
       <div id="weather-forecast">
         <ul id="weather-forecast-list">
-
+          <li id="forecast-1" class="clearfix">
+            <div class="forecast-li-left"></div>
+            <div class="forecast-li-icon"><i class="wi"></i></div>
+            <div class="forecast-li-temp"></div>
+            <div class="forecast-li-wind"></div>
+          </li>
+          <li id="forecast-2" class="clearfix">
+            <div class="forecast-li-left"></div>
+            <div class="forecast-li-icon"><i class="wi"></i></div>
+            <div class="forecast-li-temp"></div>
+            <div class="forecast-li-wind"></div>
+          </li>
+          <li id="forecast-3" class="clearfix">
+            <div class="forecast-li-left"></div>
+            <div class="forecast-li-icon"><i class="wi"></i></div>
+            <div class="forecast-li-temp"></div>
+            <div class="forecast-li-wind"></div>
+          </li>
+          <li id="forecast-4" class="clearfix">
+            <div class="forecast-li-left"></div>
+            <div class="forecast-li-icon"><i class="wi"></i></div>
+            <div class="forecast-li-temp"></div>
+            <div class="forecast-li-wind"></div>
+          </li>
         </ul>
       </div>
     </div>

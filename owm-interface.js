@@ -1,3 +1,8 @@
+/*
+  owm-interface.js
+  Author: teleganov: github.com/teleganov
+ */
+
 var OWM = {
   apiKey: null,
   url: 'http://api.openweathermap.org/data/2.5/',
@@ -44,6 +49,8 @@ var OWM = {
         windSpeed: response['wind']['speed'],
         windDirection: response['wind']['deg'],
         windDirectionText: windDirectionText,
+        sunriseTime: response['sys']['sunrise'],
+        sunsetTime: response['sys']['sunset'],
         time: response['dt']
       }
       if(response['clouds']) filtered['cloudiness'] = response['clouds']['all'];

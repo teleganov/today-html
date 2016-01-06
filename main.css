@@ -1,10 +1,19 @@
+html {
+    min-height: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url('http://www.allmacwallpaper.com/get/iMac-21-inch-wallpapers/Galactic-Nebula-1920x1080/93-9.jpg');
+}
+
 body {
     font-family: 'Muli', sans-serif;
     width: 100%;
-    background-color: #252525;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
     color: white;
     font-weight: 300;
     font-size: 24px;
+    text-shadow: 0 0 48px rgba(0,0,0,0.1);
 }
 
 .grid {
@@ -13,10 +22,10 @@ body {
 }
 
 .grid-left {
-    min-width: 70%;
+    width: 70%;
 }
 .grid-right {
-    min-width: 30%;
+    width: 30%;
 }
 
 #top-section {
@@ -30,28 +39,39 @@ body {
 
 #date-string {
     width: 100%;
-    font-size: 48px;
+    font-size: 36px;
 }
 #day-string {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 400;
     color: rgba(255,255,255,0.5);
 }
 #time-string {
-    font-size: 86px;
+    font-size: 64px;
     padding-top: 4px;
 }
-
+#time-string span {
+    margin: 0;
+    padding: 0;
+}
+#time-separator {
+    opacity: 0.9;
+    transition: 0s;
+}
+#time-separator.active{
+    opacity: 0.2;
+    transition: 0.5s;
+}
 
 #weather-box {
 
 }
 
 #weather-header {
-    font-size: 64px;
+    font-size: 48px;
     margin: 0 96px;
-    padding: 96px 0 48px 0;
-    border-bottom: 1px solid rgba(255,255,255, 0.25);
+    padding: 96px 0 36px 0;
+    border-bottom: 1px solid rgba(255,255,255, 0.5);
 }
 #weather-header-left {
     float: left;
@@ -71,26 +91,73 @@ body {
 
 #weather-description {
     width: 100%;
-    font-size: 32px;
+    font-size: 24px;
     margin-top: 24px;
 }
 
 #weather-header-right .wi {
-    font-size: 96px;
+    font-size: 72px;
     width: 100%;
 }
 
 #weather-desc {
     margin: 0 96px;
-    padding: 48px 0;
-    border-bottom: 1px solid rgba(255,255,255, 0.25);
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255, 0.5);
 }
 
 #weather-desc table {
-    font-size: 36px;
+    font-size: 24px;
     width: 100%;
 }
 #weather-desc td {
     width: 50%;
     padding: 8px;
+}
+#weather-desc .wi {
+    width: 48px;
+    text-align: center;
+}
+
+#weather-forecast {
+    margin: 0 96px;
+    padding: 0;
+}
+
+#weather-forecast ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#weather-forecast li {
+    font-size: 24px;
+    height: 39px;
+    padding: 16px 0 0 16px;
+}
+#weather-forecast li:nth-child(even) {
+    background-color: rgba(255,255,255,0.05);
+}
+
+.forecast-li-left {
+    float: left;
+    text-align: right;
+    width: 68px;
+    margin-right: 16px;
+    font-weight: 400;
+}
+.forecast-li-icon {
+    float: left;
+    width: 38px;
+    text-align: center;
+    overflow: visible;
+    margin-right: 16px;
+    font-size: 30px;
+    margin-top: -3px;
+}
+.forecast-li-temp {
+    float: left;
+    margin-right: 32px;
+}
+.forecast-li-wind {
+    float: left;
 }
