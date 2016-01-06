@@ -120,7 +120,7 @@ var updateTime = function(){
   $('#time-minutes').text(minuteString);
 };
 var updateWeather = function(){
-  OWM.queryByZip('current', '03861', 'us', function(response){
+  OWM.queryByZip('current', zipCode, 'us', function(response){
     var name = response['name'],
       currentTemp = Math.round(response['temperature']),
       humidity = response['humidity'],
@@ -143,7 +143,7 @@ var updateWeather = function(){
     $('#weather-sunrise').find('span').text(sunrise);
     $('#weather-sunset').find('span').text(sunset);
   });
-  OWM.queryByZip('forecast', '03861', 'us', function(response){
+  OWM.queryByZip('forecast', zipCode, 'us', function(response){
     console.log(response);
     var periods = [response['data'][0], response['data'][1], response['data'][2], response['data'][3]];
     for(var i = 1; i < 5; i++){
@@ -170,6 +170,10 @@ $(document).ready(function(){
   setInterval(updateCalendar, 60000); // check every minute
 
   // Weather
+  if(window.location.href.indexOf("franky") > -1){
+    zipCode = '02108';
+    APIkey = '435fb52fe8d729d065de270d796a7493';
+  }
   OWM.init(APIkey, 'imperial');
   updateWeather();
   setInterval(updateWeather, 60000); // update weather every minute
