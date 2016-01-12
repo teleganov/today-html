@@ -30,6 +30,9 @@ if(moment().isLeapYear()) daysInMonth[1] = 29;
 var updateCalendar = function(){
   var today = moment();
   if(today.format("D") === currentDay) return; // don't do all this work if the day has not changed.
+  if(currentDay) {
+    $('#calendar-container').find('.today').removeClass('today');
+  }
   currentDay = today.format("D");
   var todayDate = parseInt(today.format('D'));
   var month = parseInt(today.format('M')) - 1;
